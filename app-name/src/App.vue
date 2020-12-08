@@ -1,16 +1,33 @@
 <template>
   <v-app>
     <v-main>
-      <v-banner elevation="12"
-        ><v-toolbar-title>Posts</v-toolbar-title></v-banner
+      <v-banner elevation="3">
+        <v-avatar slot="icon" color="white accent-4" size="40">
+          <v-icon icon="mdi-lock" color="blue">
+            mdi-twitter
+          </v-icon> </v-avatar
+        ><v-toolbar-title>Twitter</v-toolbar-title></v-banner
       >
-      <v-container class="grey lighten-5">
+      <v-container>
         <v-row>
           <v-col cols="4" v-for="post in posts" :key="post.id">
-            <v-card elevation="2" outlined class="ma-4">
-              <v-card-title>{{ post.title }}</v-card-title>
-              <v-card-text>{{ post.body }}</v-card-text>
-              <v-card-actions>{{ post.userId }}</v-card-actions>
+            <v-card
+              elevation="6"
+              outlined
+              class="ma-4 white--text"
+              color="blue lighten-2"
+            >
+              <v-card-title class="body-1 font-weight-bold">{{
+                post.title
+              }}</v-card-title>
+              <v-card-text class="body-2 white--text">{{
+                post.body
+              }}</v-card-text>
+              <v-card-actions>
+                <v-card-text text="teste">{{ post.userId }} </v-card-text
+                ><v-avatar color="white" size="60">
+                  <img :src="getPhoto(`${post.userId}`)" /> </v-avatar
+              ></v-card-actions>
             </v-card>
           </v-col>
         </v-row>
@@ -28,6 +45,11 @@ export default {
     return {
       posts: [],
     };
+  },
+  methods: {
+    getPhoto(id) {
+      return `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+    },
   },
   async created() {
     try {
